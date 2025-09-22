@@ -64,7 +64,7 @@ ecommerce-3d-scraper/
 1. **Clone the repository**
    \`\`\`bash
    git clone <repository-url>
-   cd ecommerce-3d-scraper
+   cd product-scrapper
    \`\`\`
 
 2. **Install dependencies**
@@ -88,37 +88,14 @@ ecommerce-3d-scraper/
    
    # Optional: Blender path for high-quality rendering
    BLENDER_PATH=/usr/bin/blender
-   
-   # Optional: Proxy settings for scraping
-   # HTTP_PROXY=http://proxy:port
-   # HTTPS_PROXY=https://proxy:port
+
+4. **Start the application**
+   # run separately
+   npm run dev:server  # Backend only
+   npm run dev:client  # Frontend only
    \`\`\`
 
-4. **Database Setup**
-   
-   Make sure MongoDB is running:
-   \`\`\`bash
-   # On macOS with Homebrew
-   brew services start mongodb-community
-   
-   # On Ubuntu
-   sudo systemctl start mongod
-   
-   # On Windows
-   net start MongoDB
-   \`\`\`
-
-5. **Start the application**
-   \`\`\`bash
-   # Development mode (runs both server and client)
-   npm run dev
-   
-   # Or run separately
-   npm run server  # Backend only
-   npm run client  # Frontend only
-   \`\`\`
-
-6. **Access the application**
+5. **Access the application**
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:5000
 
@@ -178,88 +155,6 @@ Each product generates:
 - `POST /api/files/download/bulk` - Bulk download
 - `POST /api/files/upload/:productId` - Upload files
 
-## Data Structure
-
-### Product Schema
-
-\`\`\`javascript
-{
-  uid: String,              // Unique identifier
-  name: String,             // Product name
-  category: String,         // Product category
-  description: String,      // Product description
-  sourceUrl: String,        // Original product URL
-  sourceSite: String,       // Source website
-  price: Number,            // Product price
-  dimensions: {             // Physical dimensions
-    width: Number,
-    height: Number,
-    depth: Number,
-    volume: Number
-  },
-  assetMetadata: {          // 3D asset metadata
-    boundingBox: {
-      x: Number,
-      y: Number,
-      z: Number
-    }
-  },
-  annotations: {            // Product annotations
-    materials: [String],
-    composition: [Number],
-    mass: Number,
-    receptacle: Boolean,
-    // ... additional properties
-  },
-  assets: {                 // Asset file paths
-    glbModel: String,
-    dataJson: String,
-    renders: {
-      front: String,
-      side: String,
-      top: String
-    }
-  }
-}
-\`\`\`
-
-### Data.json Format
-
-\`\`\`json
-{
-  "assetMetadata": {
-    "boundingBox": {
-      "x": 0.819823682308197,
-      "y": 0.33995914459228516,
-      "z": 1.5000001192092896
-    }
-  },
-  "annotations": {
-    "description": "Product description",
-    "category": "furniture",
-    "width": 80,
-    "depth": 30,
-    "height": 150,
-    "volume": 360,
-    "materials": ["wood", "metal"],
-    "composition": [0.7, 0.3],
-    "mass": 50,
-    "receptacle": true,
-    "frontView": 0,
-    "onCeiling": false,
-    "onWall": true,
-    "onFloor": true,
-    "onObject": false,
-    "uid": "unique-identifier",
-    "pose_z_rot_angle": 0.0,
-    "scale": 1.0,
-    "z_axis_scale": true
-  }
-}
-\`\`\`
-
-## Advanced Configuration
-
 ### Blender Integration
 
 For high-quality 3D renders, install Blender and set the path:
@@ -315,40 +210,3 @@ HTTPS_PROXY=https://proxy.company.com:8080
    - Clear node_modules and reinstall
    - Check Node.js version compatibility
    - Verify Tailwind CSS configuration
-
-### Debug Mode
-
-Enable debug logging:
-
-\`\`\`env
-DEBUG=scraper:*
-NODE_ENV=development
-\`\`\`
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## License
-
-MIT License - see LICENSE file for details
-
-## Support
-
-For issues and questions:
-- Create an issue on GitHub
-- Check the troubleshooting section
-- Review the API documentation
-
-## Roadmap
-
-- [ ] Support for additional e-commerce sites
-- [ ] Real-time scraping progress updates
-- [ ] Advanced 3D model customization
-- [ ] Machine learning for better categorization
-- [ ] Cloud storage integration
-- [ ] User authentication and roles
