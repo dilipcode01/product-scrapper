@@ -102,7 +102,7 @@ const Scraper = () => {
               <div className="flex-1">
                 <input
                   type="url"
-                  placeholder="https://www.walmart.com/ip/..."
+                  placeholder="Type the URL here..."
                   className="input"
                   value={urlData.url}
                   onChange={(e) => updateUrl(index, "url", e.target.value)}

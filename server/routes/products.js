@@ -5,11 +5,22 @@ const Product = require("../models/Product")
 // Get all products
 router.get("/", async (req, res) => {
   try {
-    const { page = 1, limit = 10, category, status } = req.query
+    const { page = 1, limit = 10, category, status, sourceSite, search } = req.query
     const query = {}
 
+    // Apply filters
     if (category) query.category = category
     if (status) query.status = status
+    if (sourceSite) query.sourceSite = sourceSite
+
+    // Apply search if provided
+    if (search) {
+      query.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { description: { $regex: search, $options: 'i' } },
+        { category: { $regex: search, $options: 'i' } }
+      ]
+    }
 
     const products = await Product.find(query)
       .limit(limit * 1)
@@ -21,7 +32,7 @@ router.get("/", async (req, res) => {
     res.json({
       products,
       totalPages: Math.ceil(total / limit),
-      currentPage: page,
+      currentPage: parseInt(page),
       total,
     })
   } catch (error) {

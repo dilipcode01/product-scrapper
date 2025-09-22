@@ -91,8 +91,13 @@ ecommerce-3d-scraper/
 
 4. **Start the application**
    # run separately
-   - npm run dev:server  # Backend only
-   - npm run dev:client  # Frontend only
+   **For Frontend** 
+   - cd client 
+   - npm start
+
+   **For Backend**
+   - cd server
+   - node server.js
    \`\`\`
 
 5. **Access the application**
