@@ -35,7 +35,10 @@ yarn-error.log*
 next-env.d.ts
 
 # Server specific directories and files
-/server/assets/
+# Keep assets folder structure but ignore contents
+/server/assets/*
+!/server/assets/
+!/server/assets/.gitkeep
 /server/temp/
 /server/uploads/
 /server/logs/
